@@ -1196,4 +1196,18 @@ describe('request.get(url).query(vals) works as expected', function () {
 
     nock.restore();
   });
+
+  it('should assert using promises', function (done) {
+    const app = express();
+
+    app.get('/', function (req, res) {
+      res.status(400).end();
+    });
+
+    request(app)
+      .get('/')
+      .expect(400)
+      .then(done)
+      .catch(done);
+  });
 });
